@@ -1,0 +1,10 @@
+workflow "Linklight Test Workflow" {
+ on = "pull_request"
+ resolves = ["Call httpbin"]
+}
+
+action "Call httpbin" {
+ uses = "swinton/httpie.action@master"
+ args = ["POST", "https://tower.averyhq.com/api/v2/workflow_job_templates/113/launch/", "--auth=$USER_PASSWORD"]
+ secrets = ["USER_PASSWORD"]
+}
